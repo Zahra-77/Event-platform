@@ -2,13 +2,10 @@ import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent, clerkClient } from '@clerk/nextjs/server'
 import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
-//import { clerkClient } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
-import User from '@/lib/database/models/user.model'
  
 export async function POST(req: Request) {
- 
-  // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
+  
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
  
   if (!WEBHOOK_SECRET) {
@@ -62,16 +59,12 @@ export async function POST(req: Request) {
       clerkId: id,
       email: email_addresses[0].email_address,
       username: username!,
-      firstName: first_name,
-      lastName: last_name,
+      firstName: first_name ?? '',
+      lastName: last_name ?? '',
       photo: image_url,
     }
 
-    const newUser = await createUser({
-      ...user,
-      firstName: user.firstName || '', // Set a default value if firstName is null
-      lastName: user.lastName ?? '', // Set a default value if lastName is null
-    });
+    const newUser = await createUser(user);
 
     if(newUser) {
       await clerkClient.users.updateUserMetadata(id, {

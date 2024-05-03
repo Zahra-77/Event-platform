@@ -1,3 +1,5 @@
+
+
 import Collection from '@/components/shared/Collection'
 import { Button } from '@/components/ui/button'
 import { getEventsByUser } from '@/lib/actions/event.actions'
@@ -37,14 +39,13 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
       <section className="wrapper my-8">
         <Collection 
           data={orderedEvents}
-          emptyTitle="No event tickets purchased yet"
-          emptyStateSubtext="explore!"
+          emptyTitle="No tickets purchased yet"
+          //emptyStateSubtext="No worries - plenty of exciting events to explore!"
           collectionType="My_Tickets"
           limit={3}
           page={ordersPage}
           urlParamName="ordersPage"
-          totalPages={orders?.totalPages}
-        />
+          totalPages={orders?.totalPages} emptyStateSubtext={''}        />
       </section>
 
       {/* Events Organized */}
@@ -75,16 +76,4 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   )
 }
 
-// export default ProfilePage
-// import React from 'react'
-// import { auth } from "@clerk/nextjs/server";
-
-// const ProfilePage = () => {
-//   return (
-//     <div>
-//       ProfilePage
-//     </div>
-//   )
-// }
-
-// export default ProfilePage
+export default ProfilePage

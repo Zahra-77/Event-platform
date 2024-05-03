@@ -1,5 +1,4 @@
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-//import { Link } from 'lucide-react'
 import { CalendarHeart, User } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
